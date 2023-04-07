@@ -1,9 +1,15 @@
 #include <iostream>
+#include <cmath>
 
 using std::cout;
+using std::log;
+using std::exp;
 
 class Solution {
 public:
+    double antilog(double x, long long n){
+        return exp(n * log(x));
+    }
     double myPow(double x, long long n) {
         if(x==1) return 1;
         
@@ -14,18 +20,20 @@ public:
         }
 
         if(n > 0){
-            double total = 1.0;
-            int i = 0;
-            while(i < n){
-                total = total * x;
-                i ++;
+            if(x < 0){
+                if(n%2==0){
+                    return antilog(x * -1,n);
+                }
+                else{
+                    return antilog(x*-1, n) * -1;
+                }
             }
-            return total;
+            return antilog(x,n);
         }
     }
 };
 
 int main(){
     Solution sol;
-    cout << sol.myPow(1.00000,2147483647);
+    cout << sol.myPow(2,10);
 }
