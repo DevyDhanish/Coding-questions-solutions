@@ -1,6 +1,7 @@
 #include <iostream>
 #include <tuple>
 #include <cmath>
+#include <climits>
 
 using std::tuple;
 using std::cout;
@@ -8,30 +9,25 @@ using std::get;
 
 class Solution{
 public:
-    long reverseInteger(int x){
-        long output = 0;
-        while(true){
-            tuple<int,int> nums = divmod(x);
-            if(get<1>(nums) == 0 && get<0>(nums) == 0) break;
-            if(output <= pow(2, 31) && output >= pow(-2, 31)){
-                output = output * 10 + get<1>(nums);
+    int reverseInteger(int x) {
+        int output = 0;
+        while (x != 0) {
+            int digit = x % 10;
+            if (output > INT_MAX/10 || (output == INT_MAX/10 && digit > 7)) {
+                return 0;
             }
-            else{return 0;}
-            x = get<0>(nums);
-        } 
-        
-        if(output < 0) output * -1;
-
+            if (output < INT_MIN/10 || (output == INT_MIN/10 && digit < -8)) {
+                return 0;
+            }
+            output = output * 10 + digit;
+            x /= 10;
+        }
         return output;
-    }
-private:
-    tuple<int, int> divmod(int x){
-        return tuple<int, int>{x/10, x%10};
     }
 };
 
 int main(){
     Solution sol;
-    cout << sol.reverseInteger(-132);
+    cout << sol.reverseInteger(1534236469);
 
 }
