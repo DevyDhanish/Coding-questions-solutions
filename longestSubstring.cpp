@@ -7,37 +7,33 @@ using std::vector;
 
 class Solution{
     public:
-        bool contains(vector<char> v, char l){
-            for(char i:v){
-                if(l == i) return true;
+        bool contains(string s, char l){
+            for(int i=0;i<s.length();i++){
+                if(s[i] == l){
+                    return true;
+                }
             }
             return false;
         }
-
         int lengthOfLongestSubstring(string s){
-            vector<char> u;
+            string subString;
 
             int i = 0;
             while(i < s.length()){
-                if(contains(u, s[i])){
-                    if(u[u.size()-1] == s[i]){
-                        u.clear();
-                        u.push_back(s[i]);
-                    }
-                    else{
-                        return u.size();
-                    }
+                int j = i + 1;
+                if(s[i] == s[j] || contains(subString, s[i])){
+                    return subString.length();
                 }
-                else{
-                    u.push_back(s[i]);
+                if(contains(subString, s[i]) == false && s[i] != s[j]){
+                    subString += s[i];
                 }
                 i++;
             }
-            return u.size();
+            return subString.length();
         }
 };
 
 int main(){
     Solution sol;
-    cout << sol.lengthOfLongestSubstring("geeksforgeeks");
+    cout << sol.lengthOfLongestSubstring("bbbbb");
 }
