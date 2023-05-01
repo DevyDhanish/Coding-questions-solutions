@@ -7,3 +7,5 @@ CppProperties.json
 x64/
 .vscode/
 .vs/
+
+*.exe
