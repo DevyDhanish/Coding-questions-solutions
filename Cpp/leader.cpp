@@ -1,9 +1,7 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using std::cout;
-using std::reverse;
 using std::vector;
 
 class Solution
@@ -13,20 +11,21 @@ public:
     vector<int> leaders(int a[], int n)
     {
         vector<int> output;
-        int right_total = 0;
+        int i = n - 1;
+        int j = i;
 
-        for (int i = (n - 1); i >= 0; i--)
+        while (j >= 0)
         {
-            if (a[i] >= right_total)
+            if (a[j] >= a[i])
             {
-                output.push_back(a[i]);
+                output.push_back(a[j]);
+                i = j;
             }
-
-            right_total += a[i];
+            j--;
         }
 
-        int i = 0;
-        int j = output.size() - 1;
+        i = 0;
+        j = output.size() - 1;
 
         while (i < j)
         {
@@ -46,7 +45,8 @@ int main()
 {
     int arr[7] = {63, 70, 80, 33, 33, 47, 20};
     Solution sol;
-    for (auto i : sol.leaders(arr, 7))
+    auto ans = sol.leaders(arr, 7);
+    for (auto i : ans)
     {
         cout << " " << i;
     }
