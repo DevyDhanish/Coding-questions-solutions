@@ -14,13 +14,11 @@ public:
         for (int i = 0; i < l1; i++)
         {
             leftArray[i] = a[l + i];
-            std::cout << "Left array = " << leftArray[i] << std::endl;
         }
 
         for (int i = 0; i < r1; i++)
         {
             rightArray[i] = a[m + 1 + i];
-            std::cout << "right array = " << rightArray[i] << std::endl;
         }
 
         int i = l;
