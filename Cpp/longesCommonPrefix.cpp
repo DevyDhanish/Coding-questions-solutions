@@ -6,44 +6,26 @@ using std::string;
 class Solution
 {
 public:
-    string getSmallestWord(string arr[], int Size)
-    {
-        string smallestWord = arr[0];
-
-        for (int i = 0; i < Size; i++)
-        {
-            if (arr[i].size() < smallestWord.size())
-            {
-                smallestWord = arr[i];
-            }
-        }
-
-        return smallestWord;
-    }
-
     string longestCommonPrefix(string arr[], int N)
     {
-        if (N == 0)
-            return "-1";
-        string smallestWord = getSmallestWord(arr, N);
+        string result = arr[0];
+        int len = result.length();
 
-        int i = 0;
-        while (i < N)
+        for (int i = 1; i < N; i++)
         {
-            for (int j = smallestWord.size() - 1; j >= 0; j--)
+            while (arr[i].find(result) != 0)
             {
-                if (smallestWord.size() <= 0)
-                    return "-1";
 
-                if (arr[i][j] != smallestWord[j])
+                result = result.substr(0, len - 1);
+                len--;
+
+                if (result.empty())
                 {
-                    smallestWord.resize(smallestWord.size() - 1);
+                    return "-1";
                 }
             }
-            i++;
         }
-
-        return smallestWord;
+        return result;
     }
 };
 
